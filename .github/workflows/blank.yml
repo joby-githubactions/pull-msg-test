@@ -16,8 +16,10 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           COMMENT="✅ Build passed successfully!"
-          curl -s -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Content-Type: application/json" \
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+               -H "Content-Type: application/vnd.github+json" \
+               -H "X-GitHub-Api-Version: 2022-11-28" \
                -X POST \
                -d "{\"body\": \"Auto Generated @ $COMMENT\"}" \
                "https://api.github.com/repos/$REPO/issues/$PR_NUMBER/comments"
+               
